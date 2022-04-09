@@ -1,4 +1,4 @@
-# Business Daze
+# [Business Daze](https://businessdaze.surge.sh)
 
 Calculate the number of business days in a month
 
