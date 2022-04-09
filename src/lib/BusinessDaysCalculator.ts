@@ -1,9 +1,13 @@
 import { DateCalculator } from './DateCalculator';
-import { Direction } from '../types';
+
+enum Direction {
+  Before = -1,
+  After = 1,
+}
 
 export class BusinessDaysCalculator extends DateCalculator {
   calculate(from: Date): number {
-    return this.#value(from) + this.#count(from, Direction.Previous) + this.#count(from, Direction.Next);
+    return this.#value(from) + this.#count(from, Direction.Before) + this.#count(from, Direction.After);
   }
 
   #value(day: Date): number {

@@ -1,21 +1,16 @@
 import { range } from './util';
 
 export abstract class DateCalculator {
-  readonly #weekdays: Set<number>;
-  readonly #millisecondMap: Map<string, number>;
+  readonly #weekdays = new Set(range(5));
+  readonly #millisecondMap = new Map([
+    ['second', 1000],
+    ['minute', 6e5],
+    ['hour', 36e5],
+    ['day', 864e5],
+    ['week', 6048e5],
+  ]);
 
   abstract calculate(from: Date): number;
-
-  constructor() {
-    this.#weekdays = new Set(range(5));
-    this.#millisecondMap = new Map([
-      ['second', 1000],
-      ['minute', 6e5],
-      ['hour', 36e5],
-      ['day', 864e5],
-      ['week', 6048e5],
-    ]);
-  }
 
   isBusiness(day: Date): boolean {
     return this.#weekdays.has(day.getUTCDay());
