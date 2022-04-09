@@ -1,35 +1,72 @@
 import { describe, expect, it } from 'vitest';
-import { calculateBusinessDaysInMonth, range } from './date';
-
-describe('range', () => {
-  const numbers = [...range(7)];
-
-  it('generates the correct amount of numbers', () => {
-    expect(numbers).toHaveLength(7);
-  });
-
-  it('is in ascending order', () => {
-    expect(numbers.shift()).toBe(1);
-    expect(numbers.pop()).toBe(7);
-  });
-});
+import { BusinessDaysInMonth, DateCalculator } from './date';
 
 describe('business days in a month', () => {
   it('calculates correct business days in April 2022', () => {
-    for (const n of range(30)) {
-      const paddedDay = n.toString().padStart(2, '0');
-      const businessDays = calculateBusinessDaysInMonth(new Date(`2022-04-${paddedDay}`));
+    const businessDays = new BusinessDaysInMonth();
 
-      expect(businessDays).toBe(21);
-    }
+    expect(businessDays.calculate(new Date('2022-04-01'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-02'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-03'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-04'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-05'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-06'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-07'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-08'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-09'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-10'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-11'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-12'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-13'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-14'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-15'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-16'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-17'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-18'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-19'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-20'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-21'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-22'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-23'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-24'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-25'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-26'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-27'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-28'))).toBe(21);
+    expect(businessDays.calculate(new Date('2022-04-29'))).toBe(21);
   });
 
   it('calculates correct business days in a leap year February 2020', () => {
-    for (const n of range(29)) {
-      const paddedDay = n.toString().padStart(2, '0');
-      const businessDays = calculateBusinessDaysInMonth(new Date(`2020-02-${paddedDay}`));
+    const businessDays = new BusinessDaysInMonth();
 
-      expect(businessDays).toBe(20);
-    }
+    expect(businessDays.calculate(new Date('2020-02-01'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-02'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-03'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-04'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-05'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-06'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-07'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-08'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-09'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-10'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-11'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-12'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-13'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-14'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-15'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-16'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-17'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-18'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-19'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-20'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-21'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-22'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-23'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-24'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-25'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-26'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-27'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-28'))).toBe(20);
+    expect(businessDays.calculate(new Date('2020-02-29'))).toBe(20);
   });
 });

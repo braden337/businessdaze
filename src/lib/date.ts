@@ -1,39 +1,55 @@
-export function calculateBusinessDaysInMonth(fromDay: Date): number {
-  return value(fromDay) + countNext(fromDay) + countPrevious(fromDay);
-}
+export abstract class DateCalculator {
+  readonly #oneDayInMilliseconds: number;
+  readonly #weekdays: Set<number>;
 
-function value(day: Date): number {
-  return isBusiness(day) ? 1 : 0;
-}
+  abstract calculate(from: Date): number;
 
-function isBusiness(day: Date): boolean {
-  return weekdays.has(day.getUTCDay());
-}
+  constructor() {
+    this.#oneDayInMilliseconds = 864e5;
+    this.#weekdays = new Set(this.#range(5));
+  }
 
-const weekdays: Set<number> = new Set(range(5));
+  get ONE_DAY() {
+    return this.#oneDayInMilliseconds;
+  }
+  
+  isBusiness(day: Date): boolean {
+    return this.#weekdays.has(day.getUTCDay());
+  }
 
-export function* range(size: number): Generator<number> {
-  let n = 1;
+  inSameMonth(...days: Date[]): boolean {
+    return new Set(days.map(day => day.getUTCMonth())).size === 1;
+  }
 
-  while (n <= size) {
-    yield n++;
+  *#range(size: number): Generator<number> {
+    let n = 1;
+
+    while (n <= size) {
+      yield n++;
+    }
   }
 }
 
-function countNext(day: Date): number {
-  return count(day);
-}
+export class BusinessDaysInMonth extends DateCalculator {
+  calculate(from: Date): number {
+    return this.#value(from) + this.#countNext(from) + this.#countPrevious(from);
+  }
 
-function countPrevious(day: Date): number {
-  return count(day, -1);
-}
+  #value(day: Date): number {
+    return super.isBusiness(day) ? 1 : 0;
+  }
 
-function count(day: Date, direction: number = 1): number {
-  const next = new Date(+day + 864e5 * direction);
+  #countNext(day: Date): number {
+    return this.#count(day, 1);
+  }
 
-  return inSameMonth(day, next) ? value(next) + count(next, direction) : 0;
-}
+  #countPrevious(day: Date): number {
+    return this.#count(day, -1);
+  }
 
-function inSameMonth(...days: Date[]): boolean {
-  return new Set(days.map(day => day.getUTCMonth())).size === 1;
+  #count(day: Date, direction: number): number {
+    const adjacent = new Date(+day + super.ONE_DAY * direction);
+
+    return super.inSameMonth(day, adjacent) ? this.#value(adjacent) + this.#count(adjacent, direction) : 0;
+  }
 }
