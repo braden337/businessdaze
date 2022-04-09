@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { BusinessDaysInMonth } from './date';
+  import BusinessDaysInMonth from '../lib/BusinessDaysInMonth';
 
   const businessDaysInMonth = new BusinessDaysInMonth();
 
@@ -13,9 +13,9 @@
 <div>
   <header>📈🤑💰</header>
   <h1>{businessDays} business daze</h1>
-  <label for="date">
+  <label for="month">
     Choose Month:
-    <input type="date" bind:value={chosen} id="date" />
+    <input type="date" bind:value={chosen} id="month" />
   </label>
 </div>
 

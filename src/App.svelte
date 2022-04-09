@@ -1,5 +1,5 @@
 <script lang="ts">
-  import BusinessDays from './lib/BusinessDays.svelte';
+  import BusinessDays from './components/BusinessDays.svelte';
 </script>
 
 <main>

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { BusinessDaysInMonth, DateCalculator } from './date';
+import BusinessDaysInMonth from './BusinessDaysInMonth';
 
 describe('# of business days in a month', () => {
   const businessDays = new BusinessDaysInMonth();
@@ -67,29 +67,5 @@ describe('# of business days in a month', () => {
     expect(businessDays.calculate(new Date('2020-02-27'))).toBe(20);
     expect(businessDays.calculate(new Date('2020-02-28'))).toBe(20);
     expect(businessDays.calculate(new Date('2020-02-29'))).toBe(20);
-  });
-});
-
-/* c8 ignore next 5 */
-class DummyCalculator extends DateCalculator {
-  calculate(from: Date) {
-    return 7;
-  }
-}
-
-describe('abstract date calculator', () => {
-  const dummy = new DummyCalculator();
-
-  it('adds days', () => {
-    const now = new Date();
-    const tomorrow = new Date(+now + 864e5);
-
-    expect(dummy.add(now, 1, 'day')).toEqual(tomorrow);
-  });
-
-  it('throws exception when adding with bad unit', () => {
-    const addingYear = () => dummy.add(new Date(), 1, 'year');
-
-    expect(addingYear).toThrowError(new Error('year is not an accepted unit'));
   });
 });
