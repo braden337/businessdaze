@@ -1,20 +1,32 @@
 export abstract class DateCalculator {
-  readonly #oneDayInMilliseconds: number;
   readonly #weekdays: Set<number>;
+  readonly #unitsInMilliseconds: Map<string, number>;
 
   abstract calculate(from: Date): number;
 
   constructor() {
-    this.#oneDayInMilliseconds = 864e5;
     this.#weekdays = new Set(this.#range(5));
+    this.#unitsInMilliseconds = new Map([
+      ['second', 1000],
+      ['minute', 6e5],
+      ['hour', 36e5],
+      ['day', 864e5],
+      ['week', 6048e5],
+    ]);
   }
 
-  get ONE_DAY() {
-    return this.#oneDayInMilliseconds;
-  }
-  
   isBusiness(day: Date): boolean {
     return this.#weekdays.has(day.getUTCDay());
+  }
+
+  add(day: Date, amount: number, unit: string): Date {
+    const milliseconds = this.#unitsInMilliseconds.get(unit);
+
+    if (milliseconds === undefined) {
+      throw new Error(`${unit} is not an accepted unit`);
+    }
+
+    return new Date(+day + milliseconds * amount);
   }
 
   inSameMonth(...days: Date[]): boolean {
@@ -48,8 +60,12 @@ export class BusinessDaysInMonth extends DateCalculator {
   }
 
   #count(day: Date, direction: number): number {
-    const adjacent = new Date(+day + super.ONE_DAY * direction);
+    const adjacent = super.add(day, direction, 'day');
 
-    return super.inSameMonth(day, adjacent) ? this.#value(adjacent) + this.#count(adjacent, direction) : 0;
+    if (!super.inSameMonth(day, adjacent)) {
+      return 0;
+    }
+
+    return this.#value(adjacent) + this.#count(adjacent, direction);
   }
 }
