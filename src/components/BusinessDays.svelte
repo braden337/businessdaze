@@ -12,7 +12,7 @@
 
 <div>
   <header>📈🤑💰</header>
-  <h1>{businessDays} business daze</h1>
+  <h1>{businessDays} business days</h1>
   <label for="month">
     Choose Month:
     <input type="date" bind:value={chosen} id="month" />
