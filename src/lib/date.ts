@@ -1,13 +1,13 @@
-export function calculateBusinessDaysInMonth(date: Date): number {
-  return dayValue(date) + countNextDay(date) + countPreviousDay(date);
+export function calculateBusinessDaysInMonth(startingFrom: Date): number {
+  return value(startingFrom) + countNext(startingFrom) + countPrevious(startingFrom);
 }
 
-function dayValue(date: Date): number {
-  return isBusinessDay(date) ? 1 : 0;
+function value(day: Date): number {
+  return isBusiness(day) ? 1 : 0;
 }
 
-function isBusinessDay(date: Date): boolean {
-  return weekdays.has(date.getUTCDay());
+function isBusiness(day: Date): boolean {
+  return weekdays.has(day.getUTCDay());
 }
 
 const weekdays: Set<number> = new Set(range(5));
@@ -20,18 +20,18 @@ export function* range(size: number): Generator<number> {
   }
 }
 
-function countNextDay(date: Date): number {
-  return countDay(date);
+function countNext(day: Date): number {
+  return count(day);
 }
 
-function countPreviousDay(date: Date): number {
-  return countDay(date, -1);
+function countPrevious(day: Date): number {
+  return count(day, -1);
 }
 
-function countDay(date: Date, direction: number = 1): number {
-  const next = new Date(+date + 864e5 * direction);
+function count(day: Date, direction: number = 1): number {
+  const next = new Date(+day + 864e5 * direction);
 
-  return isSameMonth(date, next) ? dayValue(next) + countDay(next, direction) : 0;
+  return isSameMonth(day, next) ? value(next) + count(next, direction) : 0;
 }
 
 function isSameMonth(a: Date, b: Date): boolean {
