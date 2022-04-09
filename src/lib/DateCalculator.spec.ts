@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import DateCalculator from './DateCalculator';
+import { DateCalculator } from './DateCalculator';
 
 /* c8 ignore next 5 */
 class DummyCalculator extends DateCalculator {

@@ -1,7 +1,7 @@
-import DateCalculator from './DateCalculator';
+import { DateCalculator } from './DateCalculator';
 import { Direction } from '../types';
 
-export default class BusinessDaysCalculator extends DateCalculator {
+export class BusinessDaysCalculator extends DateCalculator {
   calculate(from: Date): number {
     return this.#value(from) + this.#count(from, Direction.Previous) + this.#count(from, Direction.Next);
   }

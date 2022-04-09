@@ -1,5 +1,5 @@
 <script lang="ts">
-  import BusinessDaysCalculator from '../lib/BusinessDaysCalculator';
+  import { BusinessDaysCalculator } from '../lib/BusinessDaysCalculator';
 
   const businessDays = new BusinessDaysCalculator();
 

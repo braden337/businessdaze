@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import BusinessDaysInMonth from './BusinessDaysCalculator';
+import { BusinessDaysCalculator } from './BusinessDaysCalculator';
 
 describe('# of business days in a month', () => {
-  const businessDays = new BusinessDaysInMonth();
+  const businessDays = new BusinessDaysCalculator();
 
   it('is correct for normal month', () => {
     expect(businessDays.calculate(new Date('2022-04-01'))).toBe(21);

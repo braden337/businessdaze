@@ -1,6 +1,6 @@
 import { range } from './util';
 
-export default abstract class DateCalculator {
+export abstract class DateCalculator {
   readonly #weekdays: Set<number>;
   readonly #millisecondMap: Map<string, number>;
 
