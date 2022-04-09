@@ -11,7 +11,7 @@ export class BusinessDaysCalculator extends DateCalculator {
   }
 
   #value(day: Date): number {
-    return super.isBusiness(day) ? 1 : 0;
+    return super.isWeekend(day) ? 0 : 1;
   }
 
   #count(day: Date, direction: Direction): number {

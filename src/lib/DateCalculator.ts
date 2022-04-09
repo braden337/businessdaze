@@ -12,8 +12,8 @@ export abstract class DateCalculator {
 
   abstract calculate(from: Date): number;
 
-  isBusiness(day: Date): boolean {
-    return this.#weekdays.has(day.getUTCDay());
+  isWeekend(day: Date): boolean {
+    return !this.#weekdays.has(day.getUTCDay());
   }
 
   add(day: Date, amount: number, unit: string): Date {
