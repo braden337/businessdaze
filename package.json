@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "test": "vitest",
+    "test": "vitest --watch --coverage",
+    "coverage": "ls coverage &>/dev/null  && http-server -o / ./coverage",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
@@ -13,6 +14,8 @@
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.30",
     "@tsconfig/svelte": "^2.0.1",
+    "c8": "^7.11.0",
+    "http-server": "^14.1.0",
     "svelte": "^3.44.0",
     "svelte-check": "^2.2.7",
     "svelte-preprocess": "^4.9.8",
