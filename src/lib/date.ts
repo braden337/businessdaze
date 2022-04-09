@@ -31,9 +31,9 @@ function countPrevious(day: Date): number {
 function count(day: Date, direction: number = 1): number {
   const next = new Date(+day + 864e5 * direction);
 
-  return isSameMonth(day, next) ? value(next) + count(next, direction) : 0;
+  return inSameMonth(day, next) ? value(next) + count(next, direction) : 0;
 }
 
-function isSameMonth(a: Date, b: Date): boolean {
-  return a.getUTCMonth() === b.getUTCMonth();
+function inSameMonth(...days: Date[]): boolean {
+  return new Set(days.map(day => day.getUTCMonth())).size === 1;
 }
