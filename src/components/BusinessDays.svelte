@@ -3,7 +3,7 @@
 
   const businessDays = new BusinessDaysCalculator();
 
-  let chosen = Date.now();
+  let chosen = new Date().toISOString().slice(0, 10)
 
   $: day = new Date(chosen);
 
