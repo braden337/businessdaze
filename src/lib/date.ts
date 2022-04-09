@@ -1,5 +1,5 @@
-export function calculateBusinessDaysInMonth(startingFrom: Date): number {
-  return value(startingFrom) + countNext(startingFrom) + countPrevious(startingFrom);
+export function calculateBusinessDaysInMonth(fromDay: Date): number {
+  return value(fromDay) + countNext(fromDay) + countPrevious(fromDay);
 }
 
 function value(day: Date): number {
