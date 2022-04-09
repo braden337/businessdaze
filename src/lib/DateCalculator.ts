@@ -1,3 +1,5 @@
+import { range } from './util';
+
 export default abstract class DateCalculator {
   readonly #weekdays: Set<number>;
   readonly #millisecondMap: Map<string, number>;
@@ -5,7 +7,7 @@ export default abstract class DateCalculator {
   abstract calculate(from: Date): number;
 
   constructor() {
-    this.#weekdays = new Set(this.#range(5));
+    this.#weekdays = new Set(range(5));
     this.#millisecondMap = new Map([
       ['second', 1000],
       ['minute', 6e5],
@@ -35,13 +37,5 @@ export default abstract class DateCalculator {
     }
 
     return ms;
-  }
-
-  *#range(size: number): Generator<number> {
-    let n = 1;
-
-    while (n <= size) {
-      yield n++;
-    }
   }
 }
