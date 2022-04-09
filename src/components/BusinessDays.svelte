@@ -1,18 +1,18 @@
 <script lang="ts">
-  import BusinessDaysInMonth from '../lib/BusinessDaysInMonth';
+  import BusinessDaysCalculator from '../lib/BusinessDaysCalculator';
 
-  const businessDaysInMonth = new BusinessDaysInMonth();
+  const businessDays = new BusinessDaysCalculator();
 
   let chosen = Date.now();
 
   $: day = new Date(chosen);
 
-  $: businessDays = businessDaysInMonth.calculate(day);
+  $: days = businessDays.calculate(day);
 </script>
 
 <div>
   <header>📈🤑💰</header>
-  <h1>{businessDays} business days</h1>
+  <h1>{days} business days</h1>
   <label for="month">
     Choose Month:
     <input type="date" bind:value={chosen} id="month" />

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import BusinessDaysInMonth from './BusinessDaysInMonth';
+import BusinessDaysInMonth from './BusinessDaysCalculator';
 
 describe('# of business days in a month', () => {
   const businessDays = new BusinessDaysInMonth();
