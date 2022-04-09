@@ -26,7 +26,7 @@
     display: grid;
   }
 
-  :global(html) {
+  :global(html, body) {
     height: -webkit-fill-available;
   }
 
