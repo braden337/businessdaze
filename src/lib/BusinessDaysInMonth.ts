@@ -3,7 +3,7 @@ import { Direction } from '../types';
 
 export default class BusinessDaysInMonth extends DateCalculator {
   calculate(from: Date): number {
-    return this.#value(from) + this.#count(from, Direction.Left) + this.#count(from, Direction.Right);
+    return this.#value(from) + this.#count(from, Direction.Previous) + this.#count(from, Direction.Next);
   }
 
   #value(day: Date): number {
