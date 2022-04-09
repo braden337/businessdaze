@@ -23,4 +23,13 @@ describe('business days in a month', () => {
       expect(businessDays).toBe(21);
     }
   });
+
+  it('calculates correct business days in a leap year February 2020', () => {
+    for (const n of range(29)) {
+      const paddedDay = n.toString().padStart(2, '0');
+      const businessDays = calculateBusinessDaysInMonth(new Date(`2020-02-${paddedDay}`));
+
+      expect(businessDays).toBe(20);
+    }
+  });
 });
